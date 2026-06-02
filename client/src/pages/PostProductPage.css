@@ -1,0 +1,36 @@
+.post-container { max-width: 780px; }
+.post-header { margin-bottom: 32px; }
+.post-header h1 { font-size: 28px; font-weight: 800; }
+.post-header p { color: var(--text-muted); margin-top: 6px; }
+.post-form { display: flex; flex-direction: column; gap: 28px; }
+.form-section { background: white; border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
+.form-section h3 { font-size: 16px; font-weight: 700; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+.form-section h3 span { font-size: 13px; font-weight: 400; color: var(--text-muted); }
+
+.image-upload-area { display: flex; gap: 12px; flex-wrap: wrap; }
+.img-preview { position: relative; width: 120px; height: 120px; border-radius: 10px; overflow: hidden; }
+.img-preview img { width: 100%; height: 100%; object-fit: cover; }
+.remove-img { position: absolute; top: 4px; right: 4px; background: rgba(0,0,0,0.6); color: white; border-radius: 50%; width: 22px; height: 22px; font-size: 12px; display: flex; align-items: center; justify-content: center; }
+.main-badge { position: absolute; bottom: 4px; left: 4px; background: var(--primary); color: white; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+.upload-btn {
+  width: 120px; height: 120px; border: 2px dashed var(--border);
+  border-radius: 10px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+  font-size: 12px; font-weight: 600; color: var(--text-muted);
+  cursor: pointer; transition: all 0.2s;
+}
+.upload-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label { font-size: 14px; font-weight: 600; color: var(--text); }
+.form-group input, .form-group textarea, .form-group select {
+  border: 2px solid var(--border); border-radius: 10px;
+  padding: 11px 14px; font-size: 14px; font-family: inherit;
+  outline: none; transition: border-color 0.2s; background: white;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary); }
+.form-group textarea { resize: vertical; }
+.submit-btn { font-size: 16px; padding: 14px 32px; align-self: flex-start; }
+@media (max-width: 580px) { .form-grid { grid-template-columns: 1fr; } .form-group.full { grid-column: auto; } }

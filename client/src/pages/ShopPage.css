@@ -1,0 +1,27 @@
+.shop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
+.shop-header h1 { font-size: 28px; font-weight: 800; }
+.search-form { display: flex; border: 2px solid var(--border); border-radius: 10px; overflow: hidden; background: white; }
+.search-form input { border: none; outline: none; padding: 10px 16px; font-size: 14px; width: 260px; font-family: inherit; }
+.search-form button { background: var(--primary); color: white; padding: 10px 16px; font-size: 16px; }
+
+.shop-layout { display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+.sidebar { background: white; border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); height: fit-content; }
+.sidebar h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.cat-btn { display: block; width: 100%; text-align: left; background: none; padding: 9px 12px; border-radius: 8px; font-size: 14px; color: var(--text-muted); font-weight: 500; margin-bottom: 4px; transition: all 0.2s; }
+.cat-btn:hover { background: var(--primary-light); color: var(--primary); }
+.cat-btn.active { background: var(--primary); color: white; font-weight: 600; }
+
+.result-count { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+.products-grid-shop { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.pagination { display: flex; gap: 8px; justify-content: center; margin-top: 32px; }
+.page-btn { width: 36px; height: 36px; border-radius: 8px; border: 2px solid var(--border); background: white; font-weight: 600; font-size: 14px; }
+.page-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+.page-btn:hover:not(.active) { border-color: var(--primary); color: var(--primary); }
+
+@media (max-width: 1024px) { .products-grid-shop { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) {
+  .shop-layout { grid-template-columns: 1fr; }
+  .sidebar { display: flex; gap: 8px; flex-wrap: wrap; }
+  .sidebar h3 { display: none; }
+}
