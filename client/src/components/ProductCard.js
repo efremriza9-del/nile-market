@@ -6,10 +6,7 @@ import './ProductCard.css';
 
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-  const image = product.images?.[0]
-    ? `${API_URL}${product.images[0]}`
-    : 'https://via.placeholder.com/300x200?text=No+Image';
+  const image = product.images?.[0] || 'https://via.placeholder.com/300x200?text=No+Image';
 
   const handleAdd = (e) => {
     e.preventDefault();

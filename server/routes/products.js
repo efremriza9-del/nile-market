@@ -41,7 +41,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', protect, upload.array('images', 5), async (req, res) => {
   try {
     const { name, description, price, category, stock } = req.body;
-    const images = req.files?.map(f => `/uploads/${f.filename}`) || [];
+    const images = req.files?.map(f => f.path) || [];
     const product = await Product.create({
       seller: req.user._id, name, description,
       price: Number(price), category, stock: Number(stock), images
@@ -61,7 +61,7 @@ router.put('/:id', protect, upload.array('images', 5), async (req, res) => {
       return res.status(403).json({ message: 'Not authorized' });
     }
     const updates = req.body;
-    if (req.files?.length) updates.images = req.files.map(f => `/uploads/${f.filename}`);
+    if (req.files?.length) updates.images = req.files.map(f => f.path);
     const updated = await Product.findByIdAndUpdate(req.params.id, updates, { new: true });
     res.json(updated);
   } catch (err) {
