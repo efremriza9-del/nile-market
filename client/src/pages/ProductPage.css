@@ -34,3 +34,25 @@
   .product-detail { grid-template-columns: 1fr; }
   .main-img img { height: 300px; }
 }
+.btn-chat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 12px 24px;
+  background: white;
+  color: #1a6b3c;
+  border: 2px solid #1a6b3c;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-chat:hover {
+  background: #1a6b3c;
+  color: white;
+}
