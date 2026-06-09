@@ -10,7 +10,7 @@ import CheckoutPage from './pages/CheckoutPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import PostProductPage from './pages/PostProductPage';
-import AdminDashboard from './pages/AdminDashboard';
+import ChatPage from './pages/ChatPage';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -27,7 +27,8 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/checkout" element={<PrivateRoute><CheckoutPage /></PrivateRoute>} />
         <Route path="/post-product" element={<PrivateRoute><PostProductPage /></PrivateRoute>} />
-        <Route path="/admin" element={<PrivateRoute adminOnly><AdminDashboard /></PrivateRoute>} />
+      <Route path="/chat" element={<PrivateRoute><ChatPage /></PrivateRoute>} />
+<Route path="/chat/:conversationId" element={<PrivateRoute><ChatPage /></PrivateRoute>} />
       </Routes>
       <Footer />
     </BrowserRouter>
