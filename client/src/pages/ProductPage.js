@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { FiStar, FiShoppingCart, FiArrowLeft, FiUser } from 'react-icons/fi';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { FiStar, FiShoppingCart, FiArrowLeft, FiUser, FiMessageCircle } from 'react-icons/fi';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import API from '../utils/api';
@@ -9,6 +9,7 @@ import './ProductPage.css';
 
 export default function ProductPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [qty, setQty] = useState(1);
@@ -30,6 +31,25 @@ export default function ProductPage() {
     toast.success(`Added ${qty} × ${product.name} to cart!`);
   };
 
+  const handleChat = async () => {
+    if (!user) { navigate('/login'); return; }
+    if (user._id === product.seller?._id) {
+      toast.error('This is your own product!');
+      return;
+    }
+    try {
+      const conversationId = [user._id, product.seller._id, product._id].sort().join('_');
+      await API.post('/api/messages', {
+        receiverId: product.seller._id,
+        productId: product._id,
+        text: `Hi! I am interested in your product: ${product.name}`,
+      });
+      navigate(`/chat/${conversationId}`);
+    } catch (err) {
+      toast.error('Could not start chat');
+    }
+  };
+
   const handleReview = async (e) => {
     e.preventDefault();
     try {
@@ -46,7 +66,7 @@ export default function ProductPage() {
   if (!product) return <div className="page container"><p>Product not found.</p></div>;
 
   const images = product.images?.length
-    ? product.images.map(i => `${API_URL}${i}`)
+    ? product.images.map(i => i.startsWith('http') ? i : `${API_URL}${i}`)
     : ['https://via.placeholder.com/500x400?text=No+Image'];
 
   return (
@@ -92,10 +112,15 @@ export default function ProductPage() {
                 </button>
               </div>
             )}
+
+            {user && user._id !== product.seller?._id && (
+              <button className="btn-chat" onClick={handleChat}>
+                <FiMessageCircle /> Chat with Seller
+              </button>
+            )}
           </div>
         </div>
 
-        {/* Reviews */}
         <div className="reviews-section">
           <h2>Customer Reviews</h2>
           {product.reviews?.length === 0 && <p className="no-reviews">No reviews yet. Be the first!</p>}
